@@ -6,6 +6,13 @@ var GPGClient = {
   'terminate': function() { close(); }
  };
 
+// Hack for Safari.
+var console;
+if (console === undefined) {
+  console = {
+    log: function() {},
+  };
+}
 
 self.addEventListener('message', function(e) {
   if (e.data.cmd == undefined)
@@ -19,5 +26,3 @@ self.addEventListener('message', function(e) {
       break;
   }
 }, false);
-
-
