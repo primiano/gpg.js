@@ -79,6 +79,10 @@ A persistent file-system is kept in the browser through IndexedDB.
     elArgs.select();
     gpgWorker = new Worker('gpg-worker.js');
     gpgWorker.postMessage({'cmd': 'start', 'args': args, 'stdin': stdin});
+    gpgWorker.addEventListener('error', function(e) {
+      console.log('Worker error ' + e.message);
+      console.log(e);
+    });
     gpgWorker.addEventListener('message', function(m) {
       var line = document.createElement('li');
       line.innerText = m.data.data;

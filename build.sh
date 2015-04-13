@@ -28,7 +28,7 @@ function transcode {
 }
 
 if [ ! -f "$GPG_BIN" ]; then
-  echo transcode
+  transcode
 fi
 
 if [ ! -f "$GPG_BIN" ]; then
@@ -39,7 +39,7 @@ fi
 mkdir -p "$DIST_DIR"
 cp "$GPG_BIN" "$DIST_DIR/gpg.bc"
 echo "Building final gpg.js"
-emcc -O2 -o "$DIST_DIR/gpg.js" "$DIST_DIR/gpg.bc"  --pre-js "$CUR_DIR/gpg-pre.js"
+emcc -O2 -g1 -o "$DIST_DIR/gpg.js" "$DIST_DIR/gpg.bc" --pre-js "$CUR_DIR/gpg-pre.js"
 rm -f "$DIST_DIR/gpg.bc"
 cp "$CUR_DIR/index.html" "$DIST_DIR/"
 cp "$CUR_DIR/gpg-worker.js" "$DIST_DIR/"
