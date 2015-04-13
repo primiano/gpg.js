@@ -6,13 +6,19 @@ var GPGClient = {
   'terminate': function() { close(); }
  };
 
+// Hack for Safari.
+var console;
+if (console === undefined) {
+  console = {
+    log: function() {},
+  };
+}
 
 self.addEventListener('message', function(e) {
   if (e.data.cmd == undefined)
     return;
   switch (e.data.cmd) {
     case 'start':
-      console.log('Starting with args: ' + e.data.args);
       GPGClient.arguments = e.data.args;
       if (e.data.stdin)
         GPGClient.stdin = e.data.stdin;
@@ -20,5 +26,3 @@ self.addEventListener('message', function(e) {
       break;
   }
 }, false);
-
-
