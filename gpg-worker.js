@@ -12,7 +12,6 @@ self.addEventListener('message', function(e) {
     return;
   switch (e.data.cmd) {
     case 'start':
-      console.log('Starting with args: ' + e.data.args);
       GPGClient.arguments = e.data.args;
       if (e.data.stdin)
         GPGClient.stdin = e.data.stdin;
